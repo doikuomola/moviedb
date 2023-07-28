@@ -11,17 +11,19 @@ export default function TrendingCard({ movie }: TrendingCardProp) {
   return (
     <div className="rounded-lg shadow-lg overflow-hidden flex flex-col justify-between">
       <div className="h-40 group">
-        <Link className="" href={`movie/${movie.id}`}>
-          <Image
-            src={`
+        {movie.poster_path ? (
+          <Link className="" href={`movie/${movie.id}`}>
+            <Image
+              src={`
           https://image.tmdb.org/t/p/w500/${movie.poster_path}
           `}
-            width={500}
-            height={500}
-            alt="banner image"
-            className="h-full w-full object-cover object-center group-hover:scale-110 transition duration-200 ease-out"
-          />
-        </Link>
+              width={500}
+              height={500}
+              alt="banner image"
+              className="h-full w-full object-cover object-center group-hover:scale-110 transition duration-200 ease-out"
+            />
+          </Link>
+        ) : null}
       </div>
       <div className="flex-1 flex-col flex justify-between p-4 md:p-6">
         <h2 className="text-lg font-bold text-black mb-2">

@@ -8,24 +8,41 @@ type MovieProps = {
   children: ReactNode;
 };
 
-export const revalidate = 300;
+async function getMovie(id: string) {
+  const response = await fetch(`https://api.themoviedb.org/3/movie/${id}`, {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${process.env.TDMB_API}`,
+    },
+    cache: 'no-store',
+    next: {
+      revalidate: 300,
+    },
+  });
+
+  const data = await response.json();
+
+  return data;
+}
 
 export default async function Movie({ params: { id }, children }: MovieProps) {
-  const response = await fetch(`http://localhost:3000/api/movie/${id}`);
-  //   const movie = (await response.json()) as Movie;
-  const movie: Movie = await response.json();
+  const movie = (await getMovie(id)) as Movie;
+
   return (
     <main className="min-h-screen ">
-      <div className="h-[40vh] relative">
-        <Image
-          fill
-          src={`
+      {movie.poster_path ? (
+        <div className="h-[40vh] relative">
+          <Image
+            fill
+            src={`
           https://image.tmdb.org/t/p/original/${movie.poster_path}
           `}
-          alt="image detail"
-          className="w-full object-cover object-center rounded-lg"
-        />
-      </div>
+            alt="image detail"
+            className="w-full object-cover object-center rounded-lg"
+          />
+        </div>
+      ) : null}
       <h1 className="text-4xl text-center font-bold py-5">{movie.title}</h1>
 
       <div className="flex gap-x-10 mt-10">
