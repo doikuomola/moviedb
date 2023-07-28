@@ -16,7 +16,6 @@ async function getMovie(id: string) {
       accept: 'application/json',
       Authorization: `Bearer ${process.env.TDMB_API}`,
     },
-    cache: 'no-store',
     next: {
       revalidate: 300,
     },
