@@ -11,7 +11,7 @@ type TrendingCardProp = {
 export default function TrendingCard({ movie }: TrendingCardProp) {
   return (
     <div className="rounded-lg shadow-lg overflow-hidden flex flex-col justify-between">
-      <div className="h-40 group">
+      <div className="h-60 md:h-40 group">
         {movie.poster_path ? (
           <Link className="" href={`movie/${movie.id}`}>
             <Image
