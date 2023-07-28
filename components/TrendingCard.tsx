@@ -1,3 +1,4 @@
+import { imageUrl } from '@/lib';
 import { Movie } from '@/typings';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,9 +15,7 @@ export default function TrendingCard({ movie }: TrendingCardProp) {
         {movie.poster_path ? (
           <Link className="" href={`movie/${movie.id}`}>
             <Image
-              src={`
-          https://image.tmdb.org/t/p/w500/${movie.poster_path}
-          `}
+              src={imageUrl(movie.poster_path)}
               width={500}
               height={500}
               alt="banner image"

@@ -6,3 +6,7 @@ ${
     : 'htp://localhost:3000'
 }/${route}
 `;
+
+export const imageUrl = (poster: string) => {
+  return `https://image.tmdb.org/t/p/original/${poster}`;
+};

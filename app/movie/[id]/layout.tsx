@@ -1,3 +1,4 @@
+import { imageUrl } from '@/lib';
 import { Movie } from '@/movie';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -35,9 +36,7 @@ export default async function Movie({ params: { id }, children }: MovieProps) {
         <div className="h-[40vh] relative">
           <Image
             fill
-            src={`
-          https://image.tmdb.org/t/p/original/${movie.poster_path}
-          `}
+            src={imageUrl(movie.poster_path)}
             alt="image detail"
             className="w-full object-cover object-center rounded-lg"
           />
@@ -49,7 +48,11 @@ export default async function Movie({ params: { id }, children }: MovieProps) {
         <div className="w-1/2 font-medium space-y-2">
           <h2 className="">
             <span className="underline">Homepage:</span>{' '}
-            <Link href={movie.homepage} target="_blank">
+            <Link
+              href={movie.homepage}
+              target="_blank"
+              className="text-teal-500 animate-pulse"
+            >
               Link
             </Link>
           </h2>
